@@ -3,10 +3,10 @@
 
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import { TranslatedText } from './TranslatedText';
+import { TranslatedText, type TranslationKey } from './TranslatedText'; // Import as a type
 
 interface CVSectionProps {
-  title: string | React.ReactNode; // Updated to accept both string and ReactNode
+  title: TranslationKey | React.ReactNode;
   children: React.ReactNode;
   defaultExpanded?: boolean;
 }
@@ -26,7 +26,7 @@ export const CVSection = ({
       >
         <h2 className="text-xl font-semibold">
           {typeof title === 'string' ? (
-            <TranslatedText textKey={title} />
+            <TranslatedText textKey={title as TranslationKey} />
           ) : (
             title
           )}

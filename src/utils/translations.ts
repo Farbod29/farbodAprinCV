@@ -5,6 +5,10 @@ export const translations = {
     de: 'Berufsziel',
     en: 'Career Objective',
   },
+  berufszielContent: {
+    de: 'Erfahrener Softwareentwickler und Projektleiter mit einem starken Hintergrund in der IT-Beratung und der Entwicklung innovativer Anwendungen. Ziel ist es, meine technischen Fähigkeiten und mein Wissen in einem dynamischen und professionellen Umfeld einzusetzen und weiterzuentwickeln.',
+    en: 'Experienced software developer and project manager with a strong background in IT consulting and innovative application development. My goal is to apply and further develop my technical skills and knowledge in a dynamic and professional environment.',
+  },
   Berufserfahrung: {
     // Capitalized to match usage
     de: 'Berufserfahrung',

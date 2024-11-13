@@ -1,7 +1,7 @@
 import React from 'react';
 import { Github, Linkedin } from 'lucide-react';
 import { TranslatedText } from './TranslatedText'; // Add this import
-import link from 'next/link';
+
 
 const SocialButtons = () => {
   const socialLinks = [

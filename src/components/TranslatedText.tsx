@@ -6,10 +6,10 @@ import { useLanguage } from '../context/LanguageContext';
 import { translations } from '@/utils/translations';
 
 // Define available translation keys
-type TranslationKey = keyof typeof translations;
+export type TranslationKey = keyof typeof translations;
 
 interface TranslatedTextProps {
-  textKey: TranslationKey; // Update to use TranslationKey instead of string
+  textKey: TranslationKey;
 }
 
 export function TranslatedText({ textKey }: TranslatedTextProps) {

@@ -3,6 +3,7 @@ import React from 'react';
 import { CVSection } from '../components/CVSection';
 import SocialButtons from '../components/SocialButtons';
 import { LanguageSwitch } from '../components/LanguageSwitch';
+import { TranslatedText } from '@/components/TranslatedText';
 
 function ExperienceItem({
   company,
@@ -110,11 +111,7 @@ export default function CVPage() {
         {/* Career Objective */}
         <CVSection title="Berufsziel" defaultExpanded={true}>
           <p className="text-gray-700 dark:text-gray-300">
-            Erfahrener Softwareentwickler und Projektleiter mit einem starken
-            Hintergrund in der IT-Beratung und der Entwicklung innovativer
-            Anwendungen. Ziel ist es, meine technischen Fähigkeiten und mein
-            Wissen in einem dynamischen und professionellen Umfeld einzusetzen
-            und weiterzuentwickeln.
+            <TranslatedText textKey="berufszielContent" />
           </p>
         </CVSection>
 
@@ -127,10 +124,10 @@ export default function CVPage() {
             location="Essen"
             description={
               <ul className="list-disc list-inside">
-                <li>Gründer der mobilen Essensbestell-App</li>
+                <li>Produktmanagement App Team von 3 Entwickler</li>
                 <li>3D-Modellierung von Restaurantumgebungen</li>
                 <li>Full Stack Entwicklung mit React/NodeJs/NestJS</li>
-                <li>Produktmanagement und UX Design</li>
+                <li>UX optimization</li>
               </ul>
             }
             technologies={[
@@ -314,7 +311,7 @@ export default function CVPage() {
             grade="Note 2.3"
             institution="Universität Duisburg-Essen"
             duration="2015 - 2019"
-            thesis="SALMON APP Sharing und Learning Material Online"
+            thesis="SALMON APP Sharing und Learning Material Online (Note: 1.3)"
             courses={[
               { name: 'Interactive Systems', grade: '2.0' },
               { name: 'Information Retrieval', grade: '1.0' },

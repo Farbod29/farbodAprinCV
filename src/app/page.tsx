@@ -102,7 +102,7 @@ export default function CVPage() {
           <h1 className="text-4xl font-bold mb-4">Dr.-Ing. Farbod Aprin</h1>
           <div className="text-gray-600 dark:text-gray-400">
             <p>Essen Deutschland</p>
-            <p>Tel: +49 17683325633</p>
+            <p>Tel: +49 176 833 25 633</p>
             <p>Email: aprin.farbod@gmail.com</p>
           </div>
         </div>
@@ -333,7 +333,7 @@ export default function CVPage() {
               <h3 className="font-semibold">Aktuellste Kenntnisse:</h3>
               <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
                 <li>Algorithmus und Softwarearchitektur (9/10)</li>
-                <li>Product Owner basierend auf Agile/Scrum-System (6/10)</li>
+                <li>Product Owner Agile/Scrum-System (6/10)</li>
                 <li>Front-End-Programmierung (ReactJs/Next) (7/10)</li>
               </ul>
             </div>

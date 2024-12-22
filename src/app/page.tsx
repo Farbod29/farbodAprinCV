@@ -4,6 +4,7 @@ import { CVSection } from '../components/CVSection';
 import SocialButtons from '../components/SocialButtons';
 import { LanguageSwitch } from '../components/LanguageSwitch';
 import { TranslatedText } from '@/components/TranslatedText';
+import Image from 'next/image';
 
 function ExperienceItem({
   company,
@@ -99,8 +100,19 @@ export default function CVPage() {
       <LanguageSwitch />
       <div className="max-w-4xl mx-auto p-6">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Dr.-Ing. Farbod Aprin</h1>
+        <div className="text-center mb-12 flex flex-col items-center">
+          <div className="relative w-[120px] h-[120px] mb-4 flex justify-center overflow-hidden mt-[30px]">
+            <div className="absolute inset-0 bg-gray-200 dark:bg-gray-800 rounded-full mt-12" />
+            <Image
+              src="/cvImage.png"
+              alt="CV Header Image"
+              width={30}
+              height={30}
+              layout="responsive"
+              className="rounded-full relative z-10"
+            />
+          </div>
+          <h3 className="text-3xl font-bold mb-4">Dr.-Ing. Farbod Aprin</h3>
           <div className="text-gray-600 dark:text-gray-400">
             <p>Essen Deutschland</p>
             <p>Tel: +49 176 833 25 633</p>

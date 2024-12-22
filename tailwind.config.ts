@@ -9,17 +9,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: {
-          light: '#ffffff', // Light mode background
-          dark: '#1a1a1a', // Dark mode background
-        },
-        foreground: {
-          light: '#000000', // Light mode text
-          dark: '#ffffff', // Dark mode text
-        },
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
       },
     },
   },
-  darkMode: 'media', // Use system preferences for dark/light mode
+  darkMode: 'class', // Change to 'class' for manual control
   plugins: [],
 } satisfies Config;

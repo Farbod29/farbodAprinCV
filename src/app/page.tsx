@@ -1,10 +1,14 @@
 // app/page.tsx
+'use client';
+
 import React from 'react';
 import { CVSection } from '../components/CVSection';
 import SocialButtons from '../components/SocialButtons';
 import { LanguageSwitch } from '../components/LanguageSwitch';
 import { TranslatedText } from '@/components/TranslatedText';
 import Image from 'next/image';
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 function ExperienceItem({
   company,
@@ -23,17 +27,19 @@ function ExperienceItem({
 }) {
   return (
     <div className="border-l-4 border-blue-500 pl-4 mb-8">
-      <h3 className="font-bold text-xl">{company}</h3>
-      <p className="font-semibold text-gray-700 dark:text-gray-300">{role}</p>
-      <p className="text-gray-600 dark:text-gray-400">{duration}</p>
-      <p className="text-gray-600 dark:text-gray-400 mb-2">{location}</p>
-      <div className="text-gray-700 dark:text-gray-300">{description}</div>
+      <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100">
+        {company}
+      </h3>
+      <p className="font-semibold text-gray-900 dark:text-gray-100">{role}</p>
+      <p className="text-gray-900 dark:text-gray-100">{duration}</p>
+      <p className="text-gray-900 dark:text-gray-100 mb-2">{location}</p>
+      <div className="text-gray-900 dark:text-gray-100">{description}</div>
       {technologies && (
         <div className="mt-2 flex flex-wrap gap-2">
           {technologies.map((tech) => (
             <span
               key={tech}
-              className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded-full text-sm"
+              className="px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-full text-sm"
             >
               {tech}
             </span>
@@ -61,28 +67,34 @@ function EducationItem({
 }) {
   return (
     <div className="border-l-4 border-green-500 pl-4 mb-8">
-      <h3 className="font-bold text-xl">{degree}</h3>
+      <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100">
+        {degree}
+      </h3>
       {grade && (
-        <p className="text-gray-700 dark:text-gray-300 font-semibold">
+        <p className="text-gray-900 dark:text-gray-100 font-semibold">
           {grade}
         </p>
       )}
-      <p className="text-gray-600 dark:text-gray-400">{institution}</p>
-      <p className="text-gray-600 dark:text-gray-400">{duration}</p>
+      <p className="text-gray-900 dark:text-gray-100">{institution}</p>
+      <p className="text-gray-900 dark:text-gray-100">{duration}</p>
       {thesis && (
         <div className="mt-2">
-          <p className="font-semibold">Thesis:</p>
-          <p className="text-gray-700 dark:text-gray-300 italic">{thesis}</p>
+          <p className="font-semibold text-gray-900 dark:text-gray-100">
+            Thesis:
+          </p>
+          <p className="text-gray-900 dark:text-gray-100 italic">{thesis}</p>
         </div>
       )}
       {courses && (
         <div className="mt-2">
-          <p className="font-semibold">Key Courses:</p>
+          <p className="font-semibold text-gray-900 dark:text-gray-100">
+            Key Courses:
+          </p>
           <ul className="list-disc list-inside">
             {courses.map((course) => (
               <li
                 key={course.name}
-                className="text-gray-700 dark:text-gray-300"
+                className="text-gray-900 dark:text-gray-100"
               >
                 {course.name} (Note: {course.grade})
               </li>
@@ -95,14 +107,29 @@ function EducationItem({
 }
 
 export default function CVPage() {
+  const { theme, setTheme } = useTheme();
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <LanguageSwitch />
-      <div className="max-w-4xl mx-auto p-6">
+      <button
+        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        className="fixed top-4 right-20 px-4 py-2 bg-gray-200 dark:bg-gray-700 mr-10
+                  text-gray-900 dark:text-gray-100 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 
+                  transition-colors duration-200"
+        aria-label="Toggle theme"
+      >
+        {theme === 'dark' ? (
+          <Sun className="w-5 h-5" />
+        ) : (
+          <Moon className="w-5 h-5" />
+        )}
+      </button>
+      <div className="max-w-4xl mx-auto p-2">
         {/* Header */}
-        <div className="text-center mb-12 flex flex-col items-center">
-          <div className="relative w-[120px] h-[120px] mb-4 flex justify-center overflow-hidden mt-[30px]">
-            <div className="absolute inset-0 bg-gray-200 dark:bg-gray-800 rounded-full mt-12" />
+        <div className="text-center mb-3 flex flex-col items-center">
+          <div className="relative w-[150px] h-[150px] mb-4 flex justify-center overflow-hidden mt-[30px]">
+            <div className="absolute inset-0 rounded-full mt-12" />
             <Image
               src="/cvImage.png"
               alt="CV Header Image"
@@ -112,8 +139,10 @@ export default function CVPage() {
               className="rounded-full relative z-10"
             />
           </div>
-          <h3 className="text-3xl font-bold mb-4">Dr.-Ing. Farbod Aprin</h3>
-          <div className="text-gray-600 dark:text-gray-400">
+          <h3 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+            Dr.-Ing. Farbod Aprin
+          </h3>
+          <div className="text-gray-900 dark:text-gray-100">
             <p>Essen Deutschland</p>
             <p>Tel: +49 176 833 25 633</p>
             <p>Email: aprin.farbod@gmail.com</p>
@@ -122,7 +151,7 @@ export default function CVPage() {
 
         {/* Career Objective */}
         <CVSection title="Berufsziel" defaultExpanded={true}>
-          <p className="text-gray-700 dark:text-gray-300">
+          <p className="text-gray-900 dark:text-gray-100">
             <TranslatedText textKey="berufszielContent" />
           </p>
         </CVSection>
@@ -135,7 +164,7 @@ export default function CVPage() {
             duration="Seit Januar 2024"
             location="Essen"
             description={
-              <ul className="list-disc list-inside">
+              <ul className="list-disc list-inside text-gray-900 dark:text-gray-100">
                 <li>Produktmanagement App Team von 3 Entwickler</li>
                 <li>3D-Modellierung von Restaurantumgebungen</li>
                 <li>Full Stack Entwicklung mit React/NodeJs/NestJS</li>
@@ -339,16 +368,20 @@ export default function CVPage() {
         <CVSection title="Kenntnisse und Fähigkeiten">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <h3 className="font-semibold">Aktuellste Kenntnisse:</h3>
-              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+                Aktuellste Kenntnisse:
+              </h3>
+              <ul className="list-disc list-inside text-gray-900 dark:text-gray-100">
                 <li>Algorithmus und Softwarearchitektur (9/10)</li>
                 <li>Product Owner Agile/Scrum-System (6/10)</li>
                 <li>Front-End-Programmierung (ReactJs/Next) (7/10)</li>
               </ul>
             </div>
             <div className="space-y-2">
-              <h3 className="font-semibold">Vorherige Felder:</h3>
-              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+                Vorherige Felder:
+              </h3>
+              <ul className="list-disc list-inside text-gray-900 dark:text-gray-100">
                 <li>Anwendungsprogrammierung in JAVA (mittel)</li>
                 <li>Computervisionsysteme (mittel)</li>
               </ul>
@@ -358,7 +391,7 @@ export default function CVPage() {
 
         {/* Awards and Languages sections remain the same */}
         <CVSection title="Auszeichnungen">
-          <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+          <ul className="space-y-2 text-gray-900 dark:text-gray-100">
             <li className="flex items-center gap-2">
               <span className="text-yellow-500">🏆</span>
               Preis für das beste Papier ITS 2022
@@ -372,17 +405,27 @@ export default function CVPage() {
 
         <CVSection title="Sprachen">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded">
-              <h3 className="font-semibold">Deutsch</h3>
-              <p>C1 verhandlungssicher</p>
+            <div className="p-4 bg-gray-200 dark:bg-gray-800 rounded">
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+                Deutsch
+              </h3>
+              <p className="text-gray-900 dark:text-gray-100">
+                C1 verhandlungssicher
+              </p>
             </div>
-            <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded">
-              <h3 className="font-semibold">English</h3>
-              <p>C2 Fortgeschritten</p>
+            <div className="p-4 bg-gray-200 dark:bg-gray-800 rounded">
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+                English
+              </h3>
+              <p className="text-gray-900 dark:text-gray-100">
+                C2 Fortgeschritten
+              </p>
             </div>
-            <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded">
-              <h3 className="font-semibold">Persisch</h3>
-              <p>Muttersprache</p>
+            <div className="p-4 bg-gray-200 dark:bg-gray-800 rounded">
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+                Persisch
+              </h3>
+              <p className="text-gray-900 dark:text-gray-100">Muttersprache</p>
             </div>
           </div>
         </CVSection>

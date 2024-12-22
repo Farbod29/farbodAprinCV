@@ -1,7 +1,7 @@
 // app/page.tsx
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CVSection } from '../components/CVSection';
 import SocialButtons from '../components/SocialButtons';
 import { LanguageSwitch } from '../components/LanguageSwitch';
@@ -19,9 +19,9 @@ function ExperienceItem({
   technologies,
 }: {
   company: string;
-  role: string;
-  duration: string;
-  location: string;
+  role: React.ReactNode;
+  duration: React.ReactNode;
+  location: React.ReactNode;
   description: React.ReactNode;
   technologies?: string[];
 }) {
@@ -58,12 +58,12 @@ function EducationItem({
   thesis,
   courses,
 }: {
-  degree: string;
-  grade?: string;
-  institution: string;
-  duration: string;
-  thesis?: string;
-  courses?: { name: string; grade: string }[];
+  degree: React.ReactNode;
+  grade?: React.ReactNode;
+  institution: React.ReactNode;
+  duration: React.ReactNode;
+  thesis?: React.ReactNode;
+  courses?: { name: React.ReactNode; grade: React.ReactNode }[];
 }) {
   return (
     <div className="border-l-4 border-green-500 pl-4 mb-8">
@@ -91,9 +91,9 @@ function EducationItem({
             Key Courses:
           </p>
           <ul className="list-disc list-inside">
-            {courses.map((course) => (
+            {courses.map((course, index) => (
               <li
-                key={course.name}
+                key={typeof course.name === 'string' ? course.name : index}
                 className="text-gray-900 dark:text-gray-100"
               >
                 {course.name} (Note: {course.grade})
@@ -108,6 +108,17 @@ function EducationItem({
 
 export default function CVPage() {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Use useEffect to handle mounting
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Don't render anything until mounted
+  if (!mounted) {
+    return null; // or a loading placeholder
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
@@ -119,7 +130,7 @@ export default function CVPage() {
                   transition-colors duration-200"
         aria-label="Toggle theme"
       >
-        {theme === 'dark' ? (
+        {mounted && theme === 'dark' ? (
           <Sun className="w-5 h-5" />
         ) : (
           <Moon className="w-5 h-5" />
@@ -157,18 +168,26 @@ export default function CVPage() {
         </CVSection>
 
         {/* Work Experience */}
-        <CVSection title="Berufserfahrung">
+        <CVSection title="Berufserfahrung" defaultExpanded={false}>
           <ExperienceItem
             company="Digimenue"
-            role="Projektleiter – Product Owner"
-            duration="Seit Januar 2024"
-            location="Essen"
+            role={<TranslatedText textKey="digimenueRole" />}
+            duration={<TranslatedText textKey="currentDate" />}
+            location={<TranslatedText textKey="essen" />}
             description={
               <ul className="list-disc list-inside text-gray-900 dark:text-gray-100">
-                <li>Produktmanagement App Team von 3 Entwickler</li>
-                <li>3D-Modellierung von Restaurantumgebungen</li>
-                <li>Full Stack Entwicklung mit React/NodeJs/NestJS</li>
-                <li>UX optimization</li>
+                <li>
+                  <TranslatedText textKey="productManagement" />
+                </li>
+                <li>
+                  <TranslatedText textKey="restaurantModeling" />
+                </li>
+                <li>
+                  <TranslatedText textKey="fullStackDev" />
+                </li>
+                <li>
+                  <TranslatedText textKey="uxOptimization" />
+                </li>
               </ul>
             }
             technologies={[
@@ -182,30 +201,40 @@ export default function CVPage() {
 
           <ExperienceItem
             company="RIAS-Institute"
-            role="Teamleiter des Softwarearchitekten"
-            duration="Juni 2019 – Dezember 2023"
-            location="Duisburg"
+            role={<TranslatedText textKey="riasRole" />}
+            duration={<TranslatedText textKey="riasDate" />}
+            location={<TranslatedText textKey="duisburg" />}
             description={
               <ul className="list-disc list-inside">
-                <li>Full-Stack-Entwickler für COURAGE Projekt</li>
-                <li>KI-basierter Chatbot Entwicklung</li>
-                <li>Wissenschaftlicher Mitarbeiter</li>
+                <li>
+                  <TranslatedText textKey="fullStackCourage" />
+                </li>
+                <li>
+                  <TranslatedText textKey="chatbotDev" />
+                </li>
+                <li>
+                  <TranslatedText textKey="scientificStaff" />
+                </li>
               </ul>
             }
             technologies={['React', 'Node.js', 'MongoDB', 'AI', 'Express']}
           />
           <ExperienceItem
             company="Digital Solution GmbH (DSG)"
-            role="JavaScript Entwickler – API-Solution"
-            duration="Juni 2022 - Oktober 2022"
-            location="München"
+            role={<TranslatedText textKey="dsgRole" />}
+            duration={<TranslatedText textKey="dsgDate" />}
+            location={<TranslatedText textKey="munich" />}
             description={
               <ul className="list-disc list-inside">
                 <li>
-                  Integration der ReactJS-Bibliothek in die Chatbot-Architektur
+                  <TranslatedText textKey="reactIntegration" />
                 </li>
-                <li>Entwicklung ADITO Software xRM solution</li>
-                <li>Chatbot-Demo Implementierung</li>
+                <li>
+                  <TranslatedText textKey="aditoSoftware" />
+                </li>
+                <li>
+                  <TranslatedText textKey="chatbotDemo" />
+                </li>
               </ul>
             }
             technologies={['React', 'JavaScript', 'API', 'Chatbot']}
@@ -213,14 +242,20 @@ export default function CVPage() {
 
           <ExperienceItem
             company="COLLIDE-GROUPE"
-            role="Studentische Hilfskraft"
-            duration="Juni 2018 – Feb 2019"
-            location="Duisburg-Essen Universität"
+            role={<TranslatedText textKey="collideRole" />}
+            duration={<TranslatedText textKey="collideDate" />}
+            location={<TranslatedText textKey="duisburgUni" />}
             description={
               <ul className="list-disc list-inside">
-                <li>Software-Entwickler und -Analytiker</li>
-                <li>FullStack Programmierung für AnalyticsWorkbench</li>
-                <li>UX-Architektur Entwicklung</li>
+                <li>
+                  <TranslatedText textKey="softwareDev" />
+                </li>
+                <li>
+                  <TranslatedText textKey="fullStackAW" />
+                </li>
+                <li>
+                  <TranslatedText textKey="uxArchitecture" />
+                </li>
               </ul>
             }
             technologies={['React', 'Java', 'CSS', 'HTML', 'Travis', 'GitHub']}
@@ -228,14 +263,20 @@ export default function CVPage() {
 
           <ExperienceItem
             company="MOBILABSOLUTION GmbH"
-            role="Softwareentwickler – Praktikum"
-            duration="September-Oktober 2017"
-            location="Köln"
+            role={<TranslatedText textKey="mobilabRole" />}
+            duration={<TranslatedText textKey="mobilabDate" />}
+            location={<TranslatedText textKey="cologne" />}
             description={
               <ul className="list-disc list-inside">
-                <li>Front-end Programmierung für Eatbu</li>
-                <li>UX und CSS Design</li>
-                <li>Software Entwicklung und Design</li>
+                <li>
+                  <TranslatedText textKey="frontEndEatbu" />
+                </li>
+                <li>
+                  <TranslatedText textKey="uxDesign" />
+                </li>
+                <li>
+                  <TranslatedText textKey="softwareDesign" />
+                </li>
               </ul>
             }
             technologies={['React', 'CSS', 'HTML', 'Travis', 'GitHub', 'Jira']}
@@ -243,35 +284,41 @@ export default function CVPage() {
 
           <ExperienceItem
             company="METRO AG"
-            role="Software Entwickler - ThoughWorks Team"
-            duration="Juni 2016 - April 2017"
-            location="Düsseldorf"
+            role={<TranslatedText textKey="metroRole" />}
+            duration={<TranslatedText textKey="metroDate" />}
+            location={<TranslatedText textKey="dusseldorf" />}
             description={
               <div>
                 <ul className="list-disc list-inside mb-4">
-                  <li>Front-end Entwicklung für SAM-Applikation</li>
-                  <li>DMV Business Analyst Framework Projekt</li>
-                  <li>IOS/Windows Webview Entwicklung</li>
-                  <li>Backend Support und Datenverarbeitung</li>
+                  <li>
+                    <TranslatedText textKey="frontEndSAM" />
+                  </li>
+                  <li>
+                    <TranslatedText textKey="dmvAnalyst" />
+                  </li>
+                  <li>
+                    <TranslatedText textKey="webviewDev" />
+                  </li>
+                  <li>
+                    <TranslatedText textKey="backendSupport" />
+                  </li>
                 </ul>
                 <div className="pl-4">
-                  <h4 className="font-semibold mb-2">Hauptprojekte:</h4>
+                  <h4 className="font-semibold mb-2">
+                    <TranslatedText textKey="mainProjects" />
+                  </h4>
                   <ul className="list-disc list-inside space-y-2">
                     <li>
-                      <span className="font-semibold">SAM Frontend:</span>{' '}
-                      Salesforce Web-Anwendung mit React
+                      <TranslatedText textKey="samFrontend" />
                     </li>
                     <li>
-                      <span className="font-semibold">Business Analysis:</span>{' '}
-                      Funktionale Tests und Design
+                      <TranslatedText textKey="businessAnalysis" />
                     </li>
                     <li>
-                      <span className="font-semibold">Mobile Development:</span>{' '}
-                      IOS/Windows Webview Integration
+                      <TranslatedText textKey="mobileDev" />
                     </li>
                     <li>
-                      <span className="font-semibold">Backend Services:</span>{' '}
-                      Java-basierte Datenverarbeitung
+                      <TranslatedText textKey="backendServices" />
                     </li>
                   </ul>
                 </div>
@@ -292,26 +339,33 @@ export default function CVPage() {
 
           <ExperienceItem
             company="SYNTECH (MRL) Technologie- und Innovationszentrum"
-            role="Software Team Lead - Robotik Team"
-            duration="Feb 2011 – Aug 2014"
-            location="Qazvīn, Iran"
+            role={<TranslatedText textKey="syntechRole" />}
+            duration={<TranslatedText textKey="syntechDate" />}
+            location={<TranslatedText textKey="qazvin" />}
             description={
               <div>
                 <ul className="list-disc list-inside mb-4">
-                  <li>Software-Entwicklung (2011-2014)</li>
-                  <li>Software Team Leadership (2012)</li>
+                  <li>
+                    <TranslatedText textKey="softwareDevelopment" />
+                  </li>
+                  <li>
+                    <TranslatedText textKey="teamLeadership" />
+                  </li>
                 </ul>
                 <div className="pl-4">
-                  <h4 className="font-semibold mb-2">Kernprojekte:</h4>
+                  <h4 className="font-semibold mb-2">
+                    <TranslatedText textKey="coreProjects" />
+                  </h4>
                   <ul className="list-disc list-inside space-y-2">
                     <li>
-                      Mapping und Localization in Mobile Robots (Quadratur
-                      robots)
+                      <TranslatedText textKey="robotMapping" />
                     </li>
                     <li>
-                      Zweidimensionale Roboternavigation (quadrotors robots)
+                      <TranslatedText textKey="robotNavigation" />
                     </li>
-                    <li>Objekt Segmentation für @home Robot</li>
+                    <li>
+                      <TranslatedText textKey="objectSegmentation" />
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -321,16 +375,17 @@ export default function CVPage() {
 
           <ExperienceItem
             company="Imen-Ara Co"
-            role="Technical Translator"
-            duration="Jan 2008 - Feb 2010"
-            location="Teheran, Iran"
+            role={<TranslatedText textKey="imenAraRole" />}
+            duration={<TranslatedText textKey="imenAraDate" />}
+            location={<TranslatedText textKey="tehran" />}
             description={
               <ul className="list-disc list-inside">
                 <li>
-                  Übersetzung von Geschäftsdokumenten aus dem Persischen ins
-                  Englische
+                  <TranslatedText textKey="translation" />
                 </li>
-                <li>Technische Dokumentation und Kommunikation</li>
+                <li>
+                  <TranslatedText textKey="technicalDoc" />
+                </li>
               </ul>
             }
             technologies={['Technical Writing', 'Translation']}
@@ -338,94 +393,131 @@ export default function CVPage() {
         </CVSection>
 
         {/* Education */}
-        <CVSection title="Bildung">
+        <CVSection
+          title={<TranslatedText textKey="Bildung" />}
+          defaultExpanded={true}
+        >
           <EducationItem
-            degree="Dr. Ing. - Informatik"
-            grade="Note 1.0, Sehr Gut, Magna cum laude"
-            institution="Universität Duisburg-Essen"
-            duration="2019 - 2023"
-            thesis="An intelligent learning companion for risk-aware of social media"
+            degree={<TranslatedText textKey="phdDegree" />}
+            grade={<TranslatedText textKey="phdGrade" />}
+            institution={<TranslatedText textKey="duisburgUni" />}
+            duration={<TranslatedText textKey="phdDuration" />}
+            thesis={<TranslatedText textKey="phdThesis" />}
           />
 
           <EducationItem
-            degree="Master of Science in Technischer Informatik"
-            grade="Note 2.3"
-            institution="Universität Duisburg-Essen"
-            duration="2015 - 2019"
-            thesis="SALMON APP Sharing und Learning Material Online (Note: 1.3)"
+            degree={<TranslatedText textKey="masterDegree" />}
+            grade={<TranslatedText textKey="masterGrade" />}
+            institution={<TranslatedText textKey="duisburgUni" />}
+            duration={<TranslatedText textKey="masterDuration" />}
+            thesis={<TranslatedText textKey="masterThesis" />}
             courses={[
-              { name: 'Interactive Systems', grade: '2.0' },
-              { name: 'Information Retrieval', grade: '1.0' },
               {
-                name: 'Gestaltung interaktiver Lehr-/Lernsysteme',
-                grade: '1.7',
+                name: <TranslatedText textKey="courseInteractiveSystems" />,
+                grade: (
+                  <TranslatedText textKey="courseInteractiveSystemsGrade" />
+                ),
+              },
+              {
+                name: <TranslatedText textKey="courseInformationRetrieval" />,
+                grade: (
+                  <TranslatedText textKey="courseInformationRetrievalGrade" />
+                ),
+              },
+              {
+                name: <TranslatedText textKey="courseInteractiveLearning" />,
+                grade: (
+                  <TranslatedText textKey="courseInteractiveLearningGrade" />
+                ),
               },
             ]}
           />
         </CVSection>
 
         {/* Skills section remains the same */}
-        <CVSection title="Kenntnisse und Fähigkeiten">
+        <CVSection
+          title={<TranslatedText textKey="skillsTitle" />}
+          defaultExpanded={true}
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <h3 className="font-semibold text-gray-900 dark:text-gray-100">
-                Aktuellste Kenntnisse:
+                <TranslatedText textKey="currentSkillsTitle" />
               </h3>
               <ul className="list-disc list-inside text-gray-900 dark:text-gray-100">
-                <li>Algorithmus und Softwarearchitektur (9/10)</li>
-                <li>Product Owner Agile/Scrum-System (6/10)</li>
-                <li>Front-End-Programmierung (ReactJs/Next) (7/10)</li>
+                <li>
+                  <TranslatedText textKey="algorithmSkill" />
+                </li>
+                <li>
+                  <TranslatedText textKey="productOwnerSkill" />
+                </li>
+                <li>
+                  <TranslatedText textKey="frontEndSkill" />
+                </li>
               </ul>
             </div>
             <div className="space-y-2">
               <h3 className="font-semibold text-gray-900 dark:text-gray-100">
-                Vorherige Felder:
+                <TranslatedText textKey="previousSkillsTitle" />
               </h3>
               <ul className="list-disc list-inside text-gray-900 dark:text-gray-100">
-                <li>Anwendungsprogrammierung in JAVA (mittel)</li>
-                <li>Computervisionsysteme (mittel)</li>
+                <li>
+                  <TranslatedText textKey="javaSkill" />
+                </li>
+                <li>
+                  <TranslatedText textKey="computerVisionSkill" />
+                </li>
               </ul>
             </div>
           </div>
         </CVSection>
 
-        {/* Awards and Languages sections remain the same */}
-        <CVSection title="Auszeichnungen">
+        {/* Awards section */}
+        <CVSection
+          title={<TranslatedText textKey="awardsTitle" />}
+          defaultExpanded={true}
+        >
           <ul className="space-y-2 text-gray-900 dark:text-gray-100">
             <li className="flex items-center gap-2">
               <span className="text-yellow-500">🏆</span>
-              Preis für das beste Papier ITS 2022
+              <TranslatedText textKey="bestPaperAward" />
             </li>
             <li className="flex items-center gap-2">
               <span className="text-yellow-500">🏅</span>
-              Goldabzeichen auf Stack Overflow
+              <TranslatedText textKey="stackOverflowAward" />
             </li>
           </ul>
         </CVSection>
 
-        <CVSection title="Sprachen">
+        {/* Languages section */}
+        <CVSection
+          title={<TranslatedText textKey="languagesTitle" />}
+          defaultExpanded={true}
+        >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-4 bg-gray-200 dark:bg-gray-800 rounded">
               <h3 className="font-semibold text-gray-900 dark:text-gray-100">
-                Deutsch
+                <TranslatedText textKey="german" />
               </h3>
               <p className="text-gray-900 dark:text-gray-100">
-                C1 verhandlungssicher
+                <TranslatedText textKey="germanLevel" />
               </p>
             </div>
             <div className="p-4 bg-gray-200 dark:bg-gray-800 rounded">
               <h3 className="font-semibold text-gray-900 dark:text-gray-100">
-                English
+                <TranslatedText textKey="english" />
               </h3>
               <p className="text-gray-900 dark:text-gray-100">
-                C2 Fortgeschritten
+                <TranslatedText textKey="englishLevel" />
               </p>
             </div>
             <div className="p-4 bg-gray-200 dark:bg-gray-800 rounded">
               <h3 className="font-semibold text-gray-900 dark:text-gray-100">
-                Persisch
+                <TranslatedText textKey="persian" />
               </h3>
-              <p className="text-gray-900 dark:text-gray-100">Muttersprache</p>
+              <p className="text-gray-900 dark:text-gray-100">
+                <TranslatedText textKey="persianLevel" />
+              </p>
             </div>
           </div>
         </CVSection>

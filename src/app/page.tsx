@@ -111,10 +111,13 @@ export default function CVPage() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Use useEffect to handle mounting
+  // Use useEffect to handle mounting and set default theme to dark
   useEffect(() => {
     setMounted(true);
-  }, []);
+    if (theme === 'system') {
+      setTheme('dark'); // Set default to dark mode
+    }
+  }, [theme, setTheme]);
 
   // Don't render anything until mounted
   if (!mounted) {
@@ -504,13 +507,6 @@ export default function CVPage() {
                 >
                   {' '}
                   (L1)
-                </a>
-                <a
-                  className="text-blue-500"
-                  href="https://stackoverflow.com/users/4752258/farbod-aprin"
-                >
-                  {' '}
-                  (L2)
                 </a>
               </li>
               <li className="flex items-center gap-2">

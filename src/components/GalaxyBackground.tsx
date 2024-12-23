@@ -23,8 +23,8 @@ function GalaxyBackground() {
     const stars = Array.from({ length: 200 }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      size: Math.random() * 2,
-      speed: Math.random() * 0.5 + 0.1,
+      size: Math.random() * 1,
+      speed: Math.random() * 0.5 + 0.3,
       angle: Math.random() * Math.PI * 2,
     }));
 
@@ -49,11 +49,24 @@ function GalaxyBackground() {
           );
         }
 
+        // Draw a trail behind the star
+        ctx.fillStyle =
+          theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)';
+        ctx.beginPath();
+        ctx.arc(
+          star.x - Math.cos(star.angle) * 5,
+          star.y - Math.sin(star.angle) * 5,
+          star.size * 2,
+          0,
+          Math.PI * 2
+        );
+        ctx.fill();
+
         star.x += Math.cos(star.angle) * star.speed;
         star.y += Math.sin(star.angle) * star.speed;
 
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.arc(star.x, star.y, star.size * 1.5, 0, Math.PI * 2); // Make the star brighter
         ctx.fillStyle = theme === 'dark' ? '#FFFFFF' : 'black';
         ctx.fill();
       });

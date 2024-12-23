@@ -411,12 +411,20 @@ export const translations = {
     en: 'Awards',
   },
   bestPaperAward: {
-    de: 'Preis für das beste Papier ITS 2022',
-    en: 'Best Paper Award ITS 2022',
+    de: 'Beste Paper-Auszeichnung ITS 2022 (Chrome-basierte Chatbot-Implementierung und Datenanalyse)',
+    en: 'Best Paper Award ITS 2022 (Chrome based Chatbot Implementation and Data Analysis)',
+  },
+  HakakhonAward: {
+    de: '🥇 1. Platz 2016 (Metro AG und flic) und 2. 🥈 Platz 2017 Metro AG Hackathon Java-Wettbewerb',
+    en: '🥇 1st Place 2016 (Metro AG and flic) und 2rd 🥈 2017 Metro AG Hakahthon Java competition ',
   },
   stackOverflowAward: {
     de: 'Goldabzeichen auf Stack Overflow',
     en: 'Stack Overflow Gold Badge',
+  },
+  roboticCompetion: {
+    de: '🥇 1. Platz 2012, 🥇 1.Platz 2014 Iran Open @Home Roboter-Team',
+    en: '🥇 1st Place 2012, 🥇 1st Place 2014 Iran open @home Robotic team',
   },
 
   // Languages Section

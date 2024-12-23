@@ -29,7 +29,8 @@ function GalaxyBackground() {
     }));
 
     function animate() {
-      //   ctx.fillStyle = theme === 'dark' ? 'white' : 'rgba(248,250,252,0.2)';
+      // Set the background color based on the current theme
+      ctx.fillStyle = theme === 'dark' ? 'black' : 'rgba(248,250,252,0.2)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       stars.forEach((star) => {
@@ -51,8 +52,7 @@ function GalaxyBackground() {
 
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fillStyle =
-          theme === 'dark' ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.2)';
+        ctx.fillStyle = theme === 'dark' ? '#FFFFFF' : 'black';
         ctx.fill();
       });
 
@@ -61,7 +61,9 @@ function GalaxyBackground() {
 
     animate();
 
-    return () => window.removeEventListener('resize', setCanvasSize);
+    return () => {
+      window.removeEventListener('resize', setCanvasSize);
+    };
   }, [theme]);
 
   return (

@@ -1,7 +1,7 @@
 // app/page.tsx
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CVSection } from '../components/CVSection';
 import SocialButtons from '../components/SocialButtons';
 import { LanguageSwitch } from '../components/LanguageSwitch';
@@ -412,7 +412,7 @@ export default function CVPage() {
           {/* Education */}
           <CVSection
             title={<TranslatedText textKey="Bildung" />}
-            defaultExpanded={true}
+            defaultExpanded={false}
           >
             <EducationItem
               degree={<TranslatedText textKey="phdDegree" />}
@@ -454,7 +454,7 @@ export default function CVPage() {
           {/* Skills section remains the same */}
           <CVSection
             title={<TranslatedText textKey="skillsTitle" />}
-            defaultExpanded={true}
+            defaultExpanded={false}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -498,10 +498,63 @@ export default function CVPage() {
               <li className="flex items-center gap-2">
                 <span className="text-yellow-500">🏆</span>
                 <TranslatedText textKey="bestPaperAward" />
+                <a
+                  className="text-blue-500"
+                  href="https://iachounta.com/website/2022/07/06/best-full-paper-award-its-2022/"
+                >
+                  {' '}
+                  (L1)
+                </a>
+                <a
+                  className="text-blue-500"
+                  href="https://stackoverflow.com/users/4752258/farbod-aprin"
+                >
+                  {' '}
+                  (L2)
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-yellow-500">🏅</span>
                 <TranslatedText textKey="stackOverflowAward" />
+                <a
+                  className="text-blue-500"
+                  href="     https://stackoverflow.com/users/4752258/farbod-aprin"
+                >
+                  {' '}
+                  (L)
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="">
+                  <TranslatedText textKey="HakakhonAward" />
+                  <a
+                    className="text-blue-500"
+                    href="https://www.dropbox.com/scl/fi/tqm0m1ddi9g7uq03idksx/hackathon_192.jpg?rlkey=cuy75bbatvy0ql2ssocjgslef&st=5dikole1&dl=0"
+                  >
+                    {' '}
+                    (L1)
+                  </a>
+                  <a
+                    className="text-blue-500"
+                    href="https://www.dropbox.com/scl/fi/lshqsvyzvg8gnte57jofb/WhatsApp-Image-2017-12-12-at-12.09.58.jpeg?rlkey=9oulwg107tivfu6zvdfz6kg50&st=6h8svzbh&dl=0"
+                  >
+                    {' '}
+                    (L2)
+                  </a>
+                </span>
+              </li>
+
+              <li className="flex items-center gap-2">
+                <span className="">
+                  <TranslatedText textKey="roboticCompetion" />
+                  <a
+                    className="text-blue-500"
+                    href="https://www.dropbox.com/scl/fi/q7vzin6zuw3g39alvfxwn/Robotic-certificates.pdf?rlkey=nrk3up213ijhphiksfu3xddv5&st=nzdzq3wz&dl=0"
+                  >
+                    {' '}
+                    (L)
+                  </a>
+                </span>
               </li>
             </ul>
           </CVSection>

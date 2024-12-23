@@ -4,11 +4,9 @@ import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '@/utils/translations';
 
-type TranslationKey = keyof typeof translations;
-
-interface TranslatedTextProps {
-  textKey: TranslationKey;
-}
+// Export the translation key type
+export type TranslationKey = keyof typeof translations;
+type Language = 'de' | 'en';
 
 interface GeneralTranslation {
   de: string;
@@ -22,6 +20,10 @@ interface CourseTranslation {
       grade: GeneralTranslation;
     };
   };
+}
+
+interface TranslatedTextProps {
+  textKey: TranslationKey;
 }
 
 function isGeneralTranslation(
@@ -43,7 +45,6 @@ export function TranslatedText({ textKey }: TranslatedTextProps) {
     return <>{translation[language]}</>;
   }
 
-  // For CourseTranslation type, handle differently or return null
   console.error(`Invalid translation format for key: ${textKey}`);
   return <>{textKey}</>;
 }

@@ -49,6 +49,18 @@ function GalaxyBackground() {
           );
         }
 
+        // Check for edge collision and wrap around
+        if (star.x < 0) {
+          star.x = canvas.width;
+        } else if (star.x > canvas.width) {
+          star.x = 0;
+        }
+        if (star.y < 0) {
+          star.y = canvas.height;
+        } else if (star.y > canvas.height) {
+          star.y = 0;
+        }
+
         // Draw a trail behind the star
         ctx.fillStyle =
           theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)';
@@ -85,7 +97,7 @@ function GalaxyBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none opacity-40"
-      style={{ zIndex: -1 }}
+      style={{ zIndex: -4 }}
     />
   );
 }

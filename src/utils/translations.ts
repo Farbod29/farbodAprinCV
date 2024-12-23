@@ -1,5 +1,35 @@
-// utils/translations.ts
-export const translations = {
+type Language = 'de' | 'en';
+
+// Define the structure of individual courses
+type Course = {
+  name: {
+    [language in Language]: string;
+  };
+  grade: {
+    [language in Language]: string;
+  };
+};
+
+// Define the shape of general translations
+type GeneralTranslation = {
+  de: string;
+  en: string;
+};
+
+// Define the shape of translations with courses
+type CourseTranslation = {
+  courses: {
+    [key: string]: Course;
+  };
+};
+
+// Use a discriminated union for the translations
+type Translations = {
+  [key: string]: GeneralTranslation | CourseTranslation;
+};
+
+// Create the translations object
+export const translations: Translations = {
   Berufsziel: {
     // Capitalized to match usage
     de: 'Berufsziel',
@@ -328,35 +358,37 @@ export const translations = {
     de: 'Hauptkurse:',
     en: 'Key Courses:',
   },
-  courses: {
-    interactiveSystems: {
-      name: {
-        de: 'Interaktive Systeme',
-        en: 'Interactive Systems',
+  educationCourses: {
+    courses: {
+      interactiveSystems: {
+        name: {
+          de: 'Interaktive Systeme',
+          en: 'Interactive Systems',
+        },
+        grade: {
+          de: 'Note: 2.0',
+          en: 'Grade: 2.0',
+        },
       },
-      grade: {
-        de: 'Note: 2.0',
-        en: 'Grade: 2.0',
+      informationRetrieval: {
+        name: {
+          de: 'Information Retrieval',
+          en: 'Information Retrieval',
+        },
+        grade: {
+          de: 'Note: 1.0',
+          en: 'Grade: 1.0',
+        },
       },
-    },
-    informationRetrieval: {
-      name: {
-        de: 'Information Retrieval',
-        en: 'Information Retrieval',
-      },
-      grade: {
-        de: 'Note: 1.0',
-        en: 'Grade: 1.0',
-      },
-    },
-    interactiveLearning: {
-      name: {
-        de: 'Gestaltung interaktiver Lehr-/Lernsysteme',
-        en: 'Design of Interactive Teaching/Learning Systems',
-      },
-      grade: {
-        de: 'Note: 1.7',
-        en: 'Grade: 1.7',
+      interactiveLearning: {
+        name: {
+          de: 'Gestaltung interaktiver Lehr-/Lernsysteme',
+          en: 'Design of Interactive Teaching/Learning Systems',
+        },
+        grade: {
+          de: 'Note: 1.7',
+          en: 'Grade: 1.7',
+        },
       },
     },
   },
@@ -424,7 +456,7 @@ export const translations = {
   },
   roboticCompetion: {
     de: '🥇 1. Platz 2012, 🥇 1.Platz 2014 Iran Open @Home Roboter-Team',
-    en: '🥇 1st Place 2012, 🥇 1st Place 2014 Iran open @home Robotic team',
+    en: '🥇 1st Place 2012,🥇1st Place 2014 Iran open @home Robotic team',
   },
 
   // Languages Section

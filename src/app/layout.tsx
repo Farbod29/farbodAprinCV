@@ -31,10 +31,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased
           bg-background text-foreground
           dark:bg-gray-900 dark:text-gray-100`}
-        style={{
-          backgroundColor: '#ffffff',
-          color: '#000000',
-        }}
+        // style={{
+        //   backgroundColor: '#ffffff',
+        //   color: '#000000',
+        // }}
       >
         <ThemeProvider attribute="class" defaultTheme="system">
           <LanguageProvider>{children}</LanguageProvider>

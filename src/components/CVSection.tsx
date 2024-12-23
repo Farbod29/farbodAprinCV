@@ -19,10 +19,10 @@ export const CVSection = ({
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
   return (
-    <div className="w-full border-b border-gray-200 dark:border-gray-700">
+    <div className="w-full border-b border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-200">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+        className="w-full flex items-center justify-between p-4 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
       >
         <h2 className="text-xl font-semibold">
           {typeof title === 'string' ? (

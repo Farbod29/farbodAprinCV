@@ -32,7 +32,7 @@ function GalaxyBackground() {
       if (!ctx || !canvas) return;
 
       // Set the background color based on the current theme
-      ctx.fillStyle = theme === 'dark' ? 'black' : 'rgba(248,250,252,0.2)';
+      ctx.fillStyle = theme === 'dark' ? 'black' : 'white';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       stars.forEach((star) => {
@@ -62,16 +62,15 @@ function GalaxyBackground() {
         }
 
         // Draw a trail behind the star
-        ctx.fillStyle =
-          theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)';
-        ctx.beginPath();
-        ctx.arc(
-          star.x - Math.cos(star.angle) * 5,
-          star.y - Math.sin(star.angle) * 5,
-          star.size * 2,
-          0,
-          Math.PI * 2
-        );
+        // ctx.fillStyle = theme === 'dark' ? 'black)' : '#FFFFFF';
+        // ctx.beginPath();
+        // ctx.arc(
+        //   star.x - Math.cos(star.angle) * 5,
+        //   star.y - Math.sin(star.angle) * 5,
+        //   star.size * 2,
+        //   0,
+        //   Math.PI * 2
+        // );
         ctx.fill();
 
         star.x += Math.cos(star.angle) * star.speed;

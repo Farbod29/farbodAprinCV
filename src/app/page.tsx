@@ -111,7 +111,7 @@ export default function CVPage() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Use useEffect to handle mounting and set default theme to dark
+  // Use useEffect to handle mounting
   useEffect(() => {
     setMounted(true);
     if (theme === 'system') {
@@ -125,14 +125,18 @@ export default function CVPage() {
   }
 
   return (
-    <div className="min-h-screen relative ">
+    <div
+      className={`min-h-screen relative ${
+        theme === 'light' ? 'bg-white opacity-90' : ''
+      }`}
+    >
       <GalaxyBackground />
       <div className="relative z-10 ">
         <LanguageSwitch />
         <button
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           className="fixed top-4 right-20 px-4 py-2 bg-gray-200 dark:bg-gray-700 mr-10
-                    text-gray-900 dark:text-gray-100 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 
+                    text-gray-900 dark:text-gray-300 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 
                     transition-colors duration-200"
           aria-label="Toggle theme"
         >
@@ -144,7 +148,8 @@ export default function CVPage() {
         </button>
         <div className="max-w-4xl mx-auto p-2">
           {/* Header */}
-          <div className="text-center mb-3 flex flex-col items-center">
+
+          <div className="{`text-center mb-3 flex flex-col items-center ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'}`">
             <div className="relative w-[150px] h-[150px] mb-4 flex justify-center overflow-hidden mt-[30px]">
               <div className="absolute inset-0 rounded-full mt-12" />
               <Image
@@ -156,10 +161,10 @@ export default function CVPage() {
                 className="rounded-full relative z-10"
               />
             </div>
-            <h3 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+            <h3 className="text-3xl font-bold mb-4 text-gray-600 dark:text-gray-100 text-center ">
               Dr.-Ing. Farbod Aprin
             </h3>
-            <div className="text-gray-900 dark:text-gray-100">
+            <div className="text-gray-600 dark:text-gray-100 text-center">
               <p>Essen Deutschland</p>
               <p>Tel: +49 176 833 25 633</p>
               <p>Email: aprin.farbod@gmail.com</p>
@@ -167,7 +172,14 @@ export default function CVPage() {
           </div>
 
           {/* Career Objective */}
-          <CVSection title="Berufsziel" defaultExpanded={true}>
+          <CVSection
+            title={
+              <span className=" hover:text-gray-900 dark:hover:text-gray-100">
+                <TranslatedText textKey="Berufsziel" />
+              </span>
+            }
+            defaultExpanded={true}
+          >
             <p className="text-gray-900 dark:text-gray-100">
               <TranslatedText textKey="berufszielContent" />
             </p>

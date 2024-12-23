@@ -29,6 +29,8 @@ function GalaxyBackground() {
     }));
 
     function animate() {
+      if (!ctx || !canvas) return;
+
       // Set the background color based on the current theme
       ctx.fillStyle = theme === 'dark' ? 'black' : 'rgba(248,250,252,0.2)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);

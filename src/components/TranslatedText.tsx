@@ -6,7 +6,7 @@ import { translations } from '@/utils/translations';
 
 // Export the translation key type
 export type TranslationKey = keyof typeof translations;
-type Language = 'de' | 'en';
+
 
 interface GeneralTranslation {
   de: string;
